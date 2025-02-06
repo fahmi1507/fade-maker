@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/naomiaro/fade-maker#readme",
   "dependencies": {
-    "fade-curves": "^1.0.2"
+    "fade-curves": "github:fahmi1507/fade-curves#v1"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
