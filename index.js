@@ -18,9 +18,9 @@ var FADEIN = exports.FADEIN = "FadeIn";
 var FADEOUT = exports.FADEOUT = "FadeOut";
 
 function sCurveFadeIn(start, duration) {
-    var curve = (0, _fadeCurves.sCurve)(10000, 1);
+    var curve = (0, _fadeCurves.sCurve)(10000, 0.2); // Ends at 0.2
 
-    console.log(curve, 'curve')
+    console.log('20%!!!!')
     this.setValueCurveAtTime(curve, start, duration);
 }
 
