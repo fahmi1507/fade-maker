@@ -1,7 +1,7 @@
 'use strict';
 
 import {sCurve, logarithmic} from 'fade-curves';
-
+// "fade-curves": "file:/Users/mbp-rci-fahmi/Documents/fade-curves"
 export const SCURVE = "sCurve";
 export const LINEAR = "linear";
 export const EXPONENTIAL = "exponential";
