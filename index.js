@@ -9,7 +9,6 @@ exports.createFadeOut = createFadeOut;
 
 var _fadeCurves = require('fade-curves');
 
-// "fade-curves": "file:/Users/mbp-rci-fahmi/Documents/fade-curves"
 var SCURVE = exports.SCURVE = "sCurve";
 var LINEAR = exports.LINEAR = "linear";
 var EXPONENTIAL = exports.EXPONENTIAL = "exponential";
@@ -28,8 +27,11 @@ function sCurveFadeOut(start, duration) {
     this.setValueCurveAtTime(curve, start, duration);
 }
 
-function linearFadeIn(start, duration) {
-    this.linearRampToValueAtTime(0, start);
+function linearFadeIn(start, duration, drawStart = 0, drawEnd = 1) {
+    console.log('======', drawStart, drawEnd, '< start end fad emaker')
+    this.setValueAtTime(drawStart, start);
+    this.linearRampToValueAtTime(drawEnd, start + duration);
+
     this.linearRampToValueAtTime(1, start + duration);
 }
 
@@ -39,9 +41,11 @@ function linearFadeOut(start, duration) {
 }
 
 function exponentialFadeIn(start, duration) {
-    this.exponentialRampToValueAtTime(0.01, start);
-    this.exponentialRampToValueAtTime(1, start + duration);
+    console.log('EXO')
+    this.setValueAtTime(0.01, start); // Ensure gain starts at 0.01 (not 0)
+    this.exponentialRampToValueAtTime(1, start + duration); // Smooth exponential fade-in
 }
+
 
 function exponentialFadeOut(start, duration) {
     this.exponentialRampToValueAtTime(1, start);
@@ -58,13 +62,13 @@ function logarithmicFadeOut(start, duration) {
     this.setValueCurveAtTime(curve, start, duration);
 }
 
-function createFadeIn(gain, shape, start, duration) {
+function createFadeIn(gain, shape, start, duration, drawStart, drawEnd) {
     switch (shape) {
         case SCURVE:
             sCurveFadeIn.call(gain, start, duration);
             break;
         case LINEAR:
-            linearFadeIn.call(gain, start, duration);
+            linearFadeIn.call(gain, start, duration, drawStart, drawEnd);
             break;
         case EXPONENTIAL:
             exponentialFadeIn.call(gain, start, duration);
