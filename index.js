@@ -35,9 +35,12 @@ function linearFadeIn(start, duration, drawStart = 0, drawEnd = 1) {
     this.linearRampToValueAtTime(1, start + duration);
 }
 
-function linearFadeOut(start, duration) {
-    this.linearRampToValueAtTime(1, start);
-    this.linearRampToValueAtTime(0, start + duration);
+function linearFadeOut(start, duration, drawStart = 1, drawEnd = 0) {
+    console.log('======', drawStart, drawEnd, '< start end fade out');
+    this.setValueAtTime(drawStart, start);
+    this.linearRampToValueAtTime(drawEnd, start + duration);
+
+    this.linearRampToValueAtTime(1, start + duration);
 }
 
 function exponentialFadeIn(start, duration) {
@@ -81,13 +84,13 @@ function createFadeIn(gain, shape, start, duration, drawStart, drawEnd) {
     }
 }
 
-function createFadeOut(gain, shape, start, duration) {
+function createFadeOut(gain, shape, start, duration, drawStart, drawEnd) {
     switch (shape) {
         case SCURVE:
             sCurveFadeOut.call(gain, start, duration);
             break;
         case LINEAR:
-            linearFadeOut.call(gain, start, duration);
+            linearFadeOut.call(gain, start, duration, drawStart, drawEnd);
             break;
         case EXPONENTIAL:
             exponentialFadeOut.call(gain, start, duration);
